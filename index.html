@@ -420,7 +420,9 @@
             </div>
         </div>
     </section>
-
+    <audio id="musica" loop>
+        <source src="The Righteous Brothers - Unchained Melody.mp3" type="audio/mpeg">
+    </audio>
     <script>
         // Countdown Timer
         function updateCountdown() {
@@ -528,6 +530,17 @@
                 });
             });
         });
+
+        document.addEventListener("DOMContentLoaded", function() {
+        const audio = document.getElementById("musica");
+
+        // Iniciar música cuando el usuario haga clic en cualquier parte de la página
+        document.body.addEventListener("click", function() {
+            if (audio.paused) {
+                audio.play();
+            }
+        }, { once: true }); // Solo activa el evento una vez
+    });
     </script>
 </body>
 </html>
