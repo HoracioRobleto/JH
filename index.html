@@ -1,21 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Mi Amor Por Ti</title>
+    <title>My Valentine</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #ff6b6b;
             --secondary-color: #ffe6e6;
             --text-color: #333;
+            --shadow: 0 2px 5px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
             font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: var(--secondary-color);
             color: var(--text-color);
+            line-height: 1.6;
         }
 
         nav {
@@ -25,7 +34,9 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         nav a {
@@ -34,17 +45,18 @@
             margin: 0 1rem;
             padding: 0.5rem;
             border-radius: 5px;
-            display: inline-block;
+            transition: var(--transition);
         }
 
         nav a:hover {
             background-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
         }
 
         section {
             min-height: 100vh;
             padding: 80px 20px 20px;
-            box-sizing: border-box;
+            scroll-margin-top: 60px;
         }
 
         .container {
@@ -58,24 +70,39 @@
             border-radius: 10px;
             padding: 20px;
             margin: 20px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .timeline-item {
             margin: 20px 0;
-            padding: 15px;
+            padding: 20px;
             border-left: 3px solid var(--primary-color);
+            background-color: white;
+            border-radius: 0 10px 10px 0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
         }
 
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
+            padding: 20px 0;
         }
 
         .photo-placeholder {
             width: 100%;
-            height: 150px;
+            aspect-ratio: 1;
             background-color: #ddd;
             display: flex;
             align-items: center;
@@ -83,11 +110,27 @@
             border-radius: 10px;
             text-align: center;
             padding: 10px;
+            transition: var(--transition);
+        }
+        .main-photo {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 10px;
+            margin:1px auto;
+            display: block;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .photo-placeholder:hover {
+            transform: scale(1.05);
+            background-color: #e6e6e6;
         }
 
         .countdown {
-            font-size: 2rem;
+            font-size: 2.5rem;
             text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
         }
 
         .quiz-container {
@@ -101,104 +144,75 @@
 
         .quiz-option {
             display: block;
-            padding: 10px;
-            margin: 5px 0;
+            padding: 15px;
+            margin: 10px 0;
             background-color: #f0f0f0;
             border-radius: 5px;
             cursor: pointer;
+            transition: var(--transition);
         }
 
         .quiz-option:hover {
-            background-color: #e0e0e0;
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
         }
 
         .secret-message {
             text-align: center;
             padding: 20px;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .secret-message:hover {
+            background-color: var(--secondary-color);
+        }
+        #download-link {
+        display: inline-block;
+        font-size: 40px; /* Tamaño grande para el ícono */
+        text-decoration: none;
+        margin-top: 10px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    #download-link:hover {
+        transform: scale(1.2); /* Efecto de agrandamiento al pasar el mouse */
+    }
+        p {
+            margin-bottom: 20px; /* Ajusta según el espacio deseado */
         }
 
         .heart {
             color: var(--primary-color);
             font-size: 24px;
+            animation: pulse 1.5s infinite;
+            display: inline-block; /* Esto asegura que esté en línea con el texto */
+            vertical-align: middle; /* Alinea verticalmente con el texto */
+            margin-left: 10px; /* Espacio entre el texto y el corazón */
         }
 
-        /* Estilos para móvil */
-        @media (max-width: 768px) {
-            nav {
-                padding: 0.5rem;
-                overflow-x: auto;
-                white-space: nowrap;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            nav a {
-                margin: 0 0.5rem;
-                padding: 0.5rem;
-                font-size: 0.9rem;
-            }
-
-            .container {
-                padding: 0 10px;
-            }
-
-            .countdown {
-                font-size: 1.5rem;
-            }
-
-            .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 10px;
-            }
-
-            .photo-placeholder {
-                height: 120px;
-            }
-
-            .timeline-item {
-                padding: 10px;
-                margin: 15px 0;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            h3 {
-                font-size: 1.2rem;
-            }
+        .poema {
+            font-family: 'Dancing Script', cursive; /* Fuente manuscrita */
+            font-size: 1.5rem; /* Tamaño de letra */
+            line-height: 1.8; /* Espaciado entre líneas */
+            color: #5a3e36; /* Color marrón suave */
+            text-align: center; /* Centrar el poema */
+            font-style: italic; /* Darle un toque cursivo */
+            padding: 15px;
+            background: rgba(255, 248, 220, 0.5); /* Color crema semitransparente */
+            border-radius: 10px;
+            width: fit-content;
+            margin: 0 auto;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
         }
 
-        /* Mejoras para pantallas muy pequeñas */
-        @media (max-width: 480px) {
-            nav a {
-                margin: 0 0.3rem;
-                padding: 0.4rem;
-                font-size: 0.8rem;
-            }
-
-            .countdown {
-                font-size: 1.2rem;
-            }
-
-            .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
-
-            .card {
-                padding: 15px;
-            }
-
-            .quiz-option {
-                padding: 8px;
-            }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
-        /* Menú hamburguesa para pantallas muy pequeñas */
         .menu-toggle {
             display: none;
             cursor: pointer;
@@ -210,6 +224,33 @@
             background-color: var(--primary-color);
             border-radius: 5px;
             color: white;
+            border: none;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.5rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            nav a {
+                margin: 0 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .countdown {
+                font-size: 1.8rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .timeline-item {
+                margin: 15px 0;
+            }
         }
 
         @media (max-width: 480px) {
@@ -223,22 +264,28 @@
 
             nav {
                 flex-direction: column;
-                align-items: center;
                 padding: 60px 0 20px;
             }
 
             nav a {
-                display: block;
-                margin: 5px 0;
                 width: 100%;
                 text-align: center;
+                margin: 5px 0;
+            }
+
+            .countdown {
+                font-size: 1.4rem;
+            }
+
+            .timeline-item {
+                padding: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <nav id="mainNav">
+    <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+    <nav id="mainNav" class="mobile-hidden">
         <a href="#inicio">Inicio</a>
         <a href="#historia">Nuestra Historia</a>
         <a href="#galeria">Galería</a>
@@ -250,10 +297,10 @@
     <section id="inicio">
         <div class="container">
             <div class="card">
-                <h1>Mi Amor Por Ti</h1>
-                <p>[Mensaje especial de bienvenida]</p>
+                <h1>¡Feliz día de San Valetín! <span class="heart">❤</span></h1>
+                <p>Con amor para usted (⁠〃ﾟ⁠3ﾟ⁠〃⁠) (⁠´⁠ε⁠｀⁠* ⁠)</p>
                 <div class="photo-placeholder">
-                    [Foto principal de ustedes dos]
+                    <img src="image/1.jpg" alt="Nuestra foto juntos" class="main-photo">
                 </div>
             </div>
         </div>
@@ -263,30 +310,42 @@
         <div class="container">
             <h2>Nuestra Historia</h2>
             <div class="timeline-item">
-                <h3>Cuando te conocí</h3>
-                <p>[Describe el primer encuentro]</p>
+                <h3>La noche en que nos conocimos</h3>
+                <p>El día de la lluvia... no podría olvidarlo...</p>
             </div>
             <div class="timeline-item">
                 <h3>Nuestra primera cita</h3>
-                <p>[Describe la primera cita]</p>
+                <p>La primera vez que tocamos juntos jeje...</p>
             </div>
             <div class="timeline-item">
                 <h3>Cuando empezamos a ser novios</h3>
-                <p>[Describe ese momento especial]</p>
+                <p>En el parque de las flores... =_=</p>
             </div>
         </div>
     </section>
 
     <section id="galeria">
         <div class="container">
-            <h2>Galería de Momentos</h2>
+            <h2>¡Nuestros Momentos juntos!</h2>
             <div class="gallery">
-                <div class="photo-placeholder">[Foto 1]</div>
-                <div class="photo-placeholder">[Foto 2]</div>
-                <div class="photo-placeholder">[Foto 3]</div>
-                <div class="photo-placeholder">[Foto 4]</div>
-                <div class="photo-placeholder">[Foto 5]</div>
-                <div class="photo-placeholder">[Foto 6]</div>
+                <div class="photo-placeholder">
+                    <img src="image/5.jpg" alt="2" class="main-photo">
+                </div>
+                <div class="photo-placeholder">
+                    <img src="image/4.jpg" alt="3" class="main-photo">
+                </div>
+                <div class="photo-placeholder">
+                    <img src="image/3.jpg" alt="4" class="main-photo">
+                </div>
+                <div class="photo-placeholder">
+                    <img src="image/2.jpg" alt="5" class="main-photo">
+                </div>
+                <div class="photo-placeholder">
+                    <img src="image/7.jpg" alt="6" class="main-photo">
+                </div>
+                <div class="photo-placeholder">
+                    <img src="image/6.jpg" alt="7" class="main-photo">
+                </div>
             </div>
         </div>
     </section>
@@ -294,8 +353,31 @@
     <section id="mensajes">
         <div class="container">
             <div class="card">
-                <h2>Carta de Amor</h2>
-                <p>[Tu carta de amor aquí]</p>
+                <h2>Un verso para usted:</h2>
+                <p class="poema">
+                Amor mío, mi amor...<br>                 
+                <br>Amor mío, mi amor, amor hallado
+                <br>de pronto en la ostra de la muerte.
+                <br>Quiero comer contigo, estar, amar contigo,
+                <br>quiero tocarte, verte.
+                <br><br>Me lo digo, lo dicen en mi cuerpo
+                <br>los hilos de mi sangre acostumbrada,
+                <br>lo dice este dolor y mis zapatos
+                <br>y mi boca y mi almohada.
+                <br><br>Te quiero, amor, amor absurdamente,
+                <br>tontamente, perdido, iluminado,
+                <br>soñando rosas e inventando estrellas
+                <br>y diciéndote adiós yendo a tu lado.
+                <br><br>Te quiero desde el poste de la esquina,
+                <br>desde la alfombra de ese cuarto a solas,
+                <br>en las sábanas tibias de tu cuerpo
+                <br>donde se duerme  un agua de amapolas.
+                <br><br>Cabellera del aire desvelado,
+                <br>río de noche, platanar oscuro,
+                <br>colmena ciega, amor desenterrado,
+                <br><br>voy a seguir tus pasos hacia arriba,
+                <br>de tus pies a tu muslo y tu costado.
+                </p>
             </div>
         </div>
     </section>
@@ -303,9 +385,9 @@
     <section id="countdown">
         <div class="container">
             <div class="card">
-                <h2>Nos Vemos En...</h2>
+                <h2>Nos Veremos En...</h2>
                 <div class="countdown" id="countdown-timer">
-                    Loading...
+                    Cargando...
                 </div>
             </div>
         </div>
@@ -316,22 +398,25 @@
             <div class="card quiz-container">
                 <h2>¿Cuánto nos conocemos?</h2>
                 <div class="quiz-question">
-                    <p>¿Cuál es mi comida favorita?</p>
-                    <div class="quiz-option">[Opción 1]</div>
-                    <div class="quiz-option">[Opción 2]</div>
-                    <div class="quiz-option">[Opción 3]</div>
+                    <p>¿Nuestra canción?</p>
+                    <div class="quiz-option" data-correct="true"> Asilo - Jorge Drexler  </div>
+                    <div class="quiz-option">Apocalypse - Cigarettes After Sex</div>
+                    <div class="quiz-option">Sparks - Coldplay</div>
                 </div>
                 <div class="quiz-question">
-                    <p>¿Cuál fue la primera película que vimos juntos?</p>
-                    <div class="quiz-option">[Opción 1]</div>
-                    <div class="quiz-option">[Opción 2]</div>
-                    <div class="quiz-option">[Opción 3]</div>
+                    <p>¿Nuestra película?</p>
+                    <div class="quiz-option">The big fish</div>
+                    <div class="quiz-option" data-correct="true">Orgullo y prejuicio</div>
+                    <div class="quiz-option">La vida es bella</div>
                 </div>
             </div>
 
-            <div class="card secret-message" id="secret-message">
-                <h3>Haz clic para revelar un mensaje secreto</h3>
-                <p style="display: none;" id="hidden-message">[Tu mensaje secreto aquí]</p>
+            <div class="card secret-message" id="secret-message" style="display: none;">
+                <h3>Ábreme:</h3>
+                <!-- <p>Te amo con todo mi corazón ❤</p> -->
+                <a id="download-link" href="imprimeme.pdf" download="imprimeme.pdf">
+                    🎁
+                </a>
             </div>
         </div>
     </section>
@@ -339,9 +424,14 @@
     <script>
         // Countdown Timer
         function updateCountdown() {
-            const targetDate = new Date('2025-03-01').getTime(); // Cambia esta fecha
+            const targetDate = new Date('2025-03-03T00:00:00').getTime();
             const now = new Date().getTime();
             const difference = targetDate - now;
+
+            if (difference <= 0) {
+                document.getElementById('countdown-timer').innerHTML = '¡El momento ha llegado!';
+                return;
+            }
 
             const days = Math.floor(difference / (1000 * 60 * 60 * 24));
             const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -353,28 +443,63 @@
         }
 
         setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
 
         // Secret Message
-        document.getElementById('secret-message').addEventListener('click', function() {
-            const hiddenMessage = document.getElementById('hidden-message');
-            if (hiddenMessage.style.display === 'none') {
-                hiddenMessage.style.display = 'block';
-            } else {
-                hiddenMessage.style.display = 'none';
-            }
+        document.addEventListener("DOMContentLoaded", function() {
+        const options = document.querySelectorAll(".quiz-option");
+        let selectedCorrectAnswers = new Set();
+        const totalCorrect = document.querySelectorAll(".quiz-option[data-correct='true']").length;
+        const secretMessage = document.getElementById("secret-message");
+
+        options.forEach(option => {
+            option.addEventListener("click", function() {
+                const isCorrect = option.getAttribute("data-correct") === "true";
+
+                // Deseleccionar otros en la misma pregunta
+                const parent = option.parentElement;
+                parent.querySelectorAll(".quiz-option").forEach(opt => {
+                    opt.classList.remove("selected");
+                    selectedCorrectAnswers.delete(opt.textContent);
+                });
+
+                // Seleccionar la opción actual
+                option.classList.add("selected");
+                
+                if (isCorrect) {
+                    selectedCorrectAnswers.add(option.textContent);
+                }
+
+                // Mostrar el mensaje si todas las respuestas correctas están seleccionadas
+                if (selectedCorrectAnswers.size === totalCorrect) {
+                    secretMessage.style.display = "block";
+                    secretMessage.scrollIntoView({ behavior: "smooth" });
+                } else {
+                    secretMessage.style.display = "none";
+                }
+            });
         });
+    });
+
 
         // Quiz functionality
         document.querySelectorAll('.quiz-option').forEach(option => {
             option.addEventListener('click', function() {
-                // Reset all options
-                this.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
+                const questionOptions = this.parentElement.querySelectorAll('.quiz-option');
+                questionOptions.forEach(opt => {
                     opt.style.backgroundColor = '#f0f0f0';
-                    opt.style.color = '#333'; // Cambiado de var(--text-color) a un color directo
+                    opt.style.color = '#333';
                 });
-                // Highlight selected option
+                
                 this.style.backgroundColor = '#ff6b6b';
                 this.style.color = 'white';
+
+                // Optional: Show if answer is correct
+                if (this.dataset.correct) {
+                    setTimeout(() => {
+                        this.style.backgroundColor = '#4CAF50';
+                    }, 50);
+                }
             });
         });
 
@@ -390,6 +515,17 @@
                 if (window.innerWidth <= 480) {
                     document.getElementById('mainNav').classList.add('mobile-hidden');
                 }
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = document.querySelector(this.getAttribute('href'));
+                section.scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
     </script>
